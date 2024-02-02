@@ -20,24 +20,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  get_r_version:
-    name: Get R version
-    runs-on: ubuntu-latest
-    outputs:
-      r-version: ${{ steps.get_r_version.outputs.R_VERSION }}
-    steps:
-      - name: Get R Version for Downstream Container Jobs
-        id: get_r_version
-        run: echo "R_VERSION=$R_VERSION" >> $GITHUB_OUTPUT
-        shell: bash
   coverage:
     name: Code Coverage
     uses: pharmaverse/admiralci/.github/workflows/code-coverage.yml@main
     if: >
       github.event_name != 'release'
-    needs: get_r_version
     with:
-      r-version: "${{ needs.get_r_version.outputs.r-version }}"
+      r-version: release
       # Whether to skip code coverage badge creation
       # Setting to 'false' will require you to create
       # an orphan branch called 'badges' in your repository
