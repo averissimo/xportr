@@ -14,12 +14,14 @@ jobs:
     outputs:
       msg: ${{ steps.set.outputs.msg }}
     env:
-      event_name: ${{ github.event_name }}
+      event_name: ${{ github.event.action }}
+      ref: ${{ github.event.after }}
+      ref2: ${{ github.ref }}
     steps:
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.after }}
+          ref:
 
       - name: Set commit message 📝
         id: set
