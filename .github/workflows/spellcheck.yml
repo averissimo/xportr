@@ -20,12 +20,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  set-commit-message:
+    name: Set commit message 📝
+    runs-on: ubuntu-latest
+    outputs:
+      msg: ${{ steps.set.outputs.msg }}
+    steps:
+      - name: Checkout repository 🛎
+        uses: actions/checkout@v4
+      - name: Set commit message 📝
+        id: set
+        run: |
+          echo "::set-output name=msg::$(git log -1 --pretty=%B)"
+
   spelling:
     name: Run Spellcheck 🔠
     runs-on: ubuntu-latest
+    needs: set-commit-message
+    # Only run if the commit message does not contain '[skip spelling]' for synchronize and opened events
     if: |
-      !(contains(github.event.commits[0].message, '[skip spellcheck]') ||
-        contains(github.event.head_commit.message, '[skip spellcheck]')
+      !(contains(github.event.commits[0].message, '[skip spelling]') ||
+        contains(github.event.head_commit.message, '[skip spelling]')
       )
     steps:
       - name: debug
@@ -33,14 +48,12 @@ jobs:
           message: ${{ github.event.commits[0].message }}
           msg2: ${{ github.event.head_commit.message }}
           json: ${{ toJson(github) }}
+          msg: ${{ needs.set-commit-message.outputs.msg }}
+          bool: ${{ contains(needs.set-commit-message.outputs.msg, '[skip spelling]') }}
         run: |
           echo $message
-          echo $msg2
-          echo ${{ github.event_name }}
-          echo ${{ github.event.commits[0].message }}
-          echo ${{ github.event.head_commit.message }}
-          echo $json
-          echo ${{ toJson(github) }}
+          echo $msg
+          echo $bool
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
 
