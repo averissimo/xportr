@@ -28,6 +28,11 @@ jobs:
         !contains(github.event.head_commit.message, '[skip spellcheck]')
       )
     steps:
+      - name: debug
+        env:
+          message: ${{ github.event.commits[0].message }}
+        run: |
+          echo $message
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
 

@@ -25,7 +25,7 @@ jobs:
     uses: pharmaverse/admiralci/.github/workflows/code-coverage.yml@main
     if: |
       !(contains(github.event.commits[0].message, '[skip coverage]') ||
-        !contains(github.event.head_commit.message, '[skip coverage]')
+        contains(github.event.head_commit.message, '[skip coverage]')
       ) && github.event_name != 'release'
     with:
       r-version: release

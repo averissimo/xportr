@@ -35,7 +35,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
     if: |
       !(contains(github.event.commits[0].message, '[skip checks]') ||
-        !contains(github.event.head_commit.message, '[skip checks]')
+        contains(github.event.head_commit.message, '[skip checks]')
       )
     steps:
       - name: Checkout repository 🛎

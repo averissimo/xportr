@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       !(contains(github.event.commits[0].message, '[skip links]') ||
-        !contains(github.event.head_commit.message, '[skip links]')
+        contains(github.event.head_commit.message, '[skip links]')
       )
     steps:
       - name: Checkout repository 🛎
