@@ -18,6 +18,8 @@ on:
   workflow_dispatch:
 
 jobs:
+  git:
+    uses: ./.github/workflows/commit-message.yaml
   R-CMD-check:
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     runs-on: ${{ matrix.config.os }}
@@ -35,7 +37,8 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
     if: |
       !(contains(github.event.commits[0].message, '[skip checks]') ||
-        contains(github.event.head_commit.message, '[skip checks]')
+        contains(github.event.head_commit.message, '[skip checks]') ||
+        contains(needs.git.outputs.msg, '[skip checks]')
       )
     steps:
       - name: Checkout repository 🛎

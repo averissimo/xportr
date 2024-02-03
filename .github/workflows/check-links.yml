@@ -20,12 +20,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  git:
+    uses: ./.github/workflows/commit-message.yaml
   links:
     name: Validate Links 🕸️
     runs-on: ubuntu-latest
     if: |
       !(contains(github.event.commits[0].message, '[skip links]') ||
-        contains(github.event.head_commit.message, '[skip links]')
+        contains(github.event.head_commit.message, '[skip links]') ||
+        contains(needs.git.outputs.msg, '[skip links]')
       )
     steps:
       - name: Checkout repository 🛎

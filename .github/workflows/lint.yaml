@@ -22,11 +22,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  git:
+    uses: ./.github/workflows/commit-message.yaml
   lint:
     runs-on: ubuntu-latest
     if: |
       !(contains(github.event.commits[0].message, '[skip lint]') ||
-        contains(github.event.head_commit.message, '[skip lint]')
+        contains(github.event.head_commit.message, '[skip lint]') ||
+        contains(needs.git.outputs.msg, '[skip lint]')
       )
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
