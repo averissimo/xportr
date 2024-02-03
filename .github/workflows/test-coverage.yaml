@@ -24,6 +24,7 @@ jobs:
     uses: ./.github/workflows/commit-message.yaml
   coverage:
     name: Code Coverage
+    needs: git
     uses: pharmaverse/admiralci/.github/workflows/code-coverage.yml@main
     if: |
       !(contains(github.event.commits[0].message, '[skip coverage]') ||

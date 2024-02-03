@@ -23,6 +23,7 @@ jobs:
   R-CMD-check:
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     runs-on: ${{ matrix.config.os }}
+    needs: git
     strategy:
       fail-fast: false
       matrix:

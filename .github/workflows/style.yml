@@ -25,6 +25,7 @@ jobs:
   style:
     name: Check code style 🧑‍🎨
     runs-on: ubuntu-latest
+    needs: git
     if: |
       !(contains(github.event.commits[0].message, '[skip style]') ||
         contains(github.event.head_commit.message, '[skip style]') ||
