@@ -31,8 +31,13 @@ jobs:
       - name: debug
         env:
           message: ${{ github.event.commits[0].message }}
+          msg2: ${{ github.event.head_commit.message }}
         run: |
           echo $message
+          echo $msg2
+          echo ${{ github.event_name }}}
+          echo ${{ github.event.commits[0].message }}
+          echo ${{ github.event.head_commit.message }}
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
 
