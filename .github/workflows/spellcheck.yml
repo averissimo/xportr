@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       !(contains(github.event.commits[0].message, '[skip spellcheck]') ||
-        contains(github.event.head_commit.message, '[skip spellcheck]')
+        !contains(github.event.head_commit.message, '[skip spellcheck]')
       )
     steps:
       - name: Checkout repository 🛎
