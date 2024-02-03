@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   git:
-    uses: ./.github/workflows/commit-message.yaml
+    uses: ./.github/workflows/commit-message.yaml@221_common
 
   spelling:
     name: Run Spellcheck 🔠
