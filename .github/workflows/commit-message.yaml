@@ -10,9 +10,11 @@ on:
 jobs:
   debug:
     runs-on: ubuntu-latest
+    env:
+      event_name: ${{ github.event_name }}
     steps:
       - run: |
-        echo ${{ github.event_name }}
+        echo yada
 
   git:
     runs-on: ubuntu-latest
