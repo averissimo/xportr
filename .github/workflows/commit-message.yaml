@@ -1,0 +1,26 @@
+---
+name: 'Get last commit message for synchronize event'
+on:
+  workflow_call:
+    outputs:
+      msg:
+        description: "Last commit message from Synchronize event"
+        value: ${{ jobs.git.outputs.msg }}
+
+jobs:
+  git:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'synchronize'
+    outputs:
+      msg: ${{ steps.set.outputs.msg }}
+    steps:
+      - name: Checkout repository 🛎
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.after }}
+
+      - name: Set commit message 📝
+        id: set
+        run: |
+          echo "msg=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+          git log -1 --pretty=%B
