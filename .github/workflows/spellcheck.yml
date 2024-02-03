@@ -28,7 +28,8 @@ jobs:
     steps:
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
-        ref: ${{ event.after }}
+        with:
+          ref: ${{ event.after }}
 
       - name: Set commit message 📝
         id: set
