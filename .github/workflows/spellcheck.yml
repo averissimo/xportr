@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   git:
-    uses: averissimo/xportr/.github/workflows/commit.yaml
+    uses: averissimo/xportr/.github/workflows/commit.yaml@221_common
 
   spelling:
     name: Run Spellcheck 🔠
@@ -33,6 +33,8 @@ jobs:
         contains(needs.git.outputs.msg, '[skip spellcheck]')
       )
     steps:
+      - run: |
+          echo ${{ needs.git.outputs.msg }}
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
 
