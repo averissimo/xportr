@@ -7,7 +7,7 @@ on:
         description: "Last commit message from Synchronize event"
         value: ${{ jobs.git.outputs.msg }}
 
-runs:
+jobs:
   git:
     runs-on: ubuntu-latest
     if: "github.event_name == 'synchronize'"
