@@ -23,6 +23,8 @@ jobs:
 
       - name: Set commit message 📝
         id: set
+        env:
+          gh: ${{ toJSON(github) }}
         run: |
-          echo "msg=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+          echo "msg=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT"
           git log -1 --pretty=%B
