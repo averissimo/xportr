@@ -23,7 +23,10 @@ jobs:
   style:
     name: Check code style 🧑‍🎨
     runs-on: ubuntu-latest
-    if: ${{ ! contains(github.event.commits[0].message, '[skip stylecheck]') }}
+    if: |
+      !(contains(github.event.commits[0].message, '[skip style]') ||
+        !contains(github.event.head_commit.message, '[skip style]')
+      )
     steps:
       - uses: actions/checkout@v4
         with:
