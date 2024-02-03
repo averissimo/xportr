@@ -8,6 +8,11 @@ on:
         value: ${{ jobs.git.outputs.msg }}
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+        echo ${{ github.event_name }}
   git:
     runs-on: ubuntu-latest
     if: "github.event_name == 'synchronize'"
