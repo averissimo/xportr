@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   git:
-    uses: averissimo/xportr/.github/workflows/commit-message.yaml@221_common
+    uses: averissimo/xportr/.github/workflows/commit-message.yaml@32fb037
 
   spelling:
     name: Run Spellcheck 🔠
