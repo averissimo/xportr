@@ -10,7 +10,7 @@ on:
 jobs:
   git:
     runs-on: ubuntu-latest
-    if: "github.event.action == 'synchronize'"
+    if: github.event.action == 'synchronize'
     outputs:
       msg: ${{ steps.set.outputs.msg }}
     env:
@@ -26,5 +26,5 @@ jobs:
       - name: Set commit message 📝
         id: set
         run: |
-          echo "msg=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT"
+          echo "msg=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
           git log -1 --pretty=%B
