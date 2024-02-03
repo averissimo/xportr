@@ -29,7 +29,7 @@ jobs:
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
         with:
-          ref: ${{ event.after }}
+          ref: ${{ github.event.after }}
 
       - name: Set commit message 📝
         id: set
