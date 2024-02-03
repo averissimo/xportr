@@ -8,19 +8,13 @@ on:
         value: ${{ jobs.git.outputs.msg }}
 
 jobs:
-  debugme:
-    runs-on: ubuntu-latest
-    env:
-      event_name: ${{ github.event_name }}
-    steps:
-      - run: |
-        echo yada
-
   git:
     runs-on: ubuntu-latest
-    if: "github.event_name == 'synchronize'"
+    #if: "github.event_name == 'synchronize'"
     outputs:
       msg: ${{ steps.set.outputs.msg }}
+    env:
+      event_name: ${{ github.event_name }}
     steps:
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
