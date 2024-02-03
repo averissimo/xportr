@@ -8,7 +8,7 @@ on:
         value: ${{ jobs.git.outputs.msg }}
 
 jobs:
-  debug:
+  debugme:
     runs-on: ubuntu-latest
     env:
       event_name: ${{ github.event_name }}
