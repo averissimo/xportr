@@ -23,7 +23,10 @@ jobs:
   spelling:
     name: Run Spellcheck 🔠
     runs-on: ubuntu-latest
-    if: "!contains(github.event.commits[0].message, '[skip spellcheck]')"
+    if: |
+      !(contains(github.event.commits[0].message, '[skip spellcheck]') ||
+        contains(github.event.head_commit.message, '[skip spellcheck]')
+      )
     steps:
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
