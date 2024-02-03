@@ -32,12 +32,15 @@ jobs:
         env:
           message: ${{ github.event.commits[0].message }}
           msg2: ${{ github.event.head_commit.message }}
+          json: ${{ toJson(github.event) }}
         run: |
           echo $message
           echo $msg2
-          echo ${{ github.event_name }}}
+          echo ${{ github.event_name }}
           echo ${{ github.event.commits[0].message }}
           echo ${{ github.event.head_commit.message }}
+          echo $json
+          echo ${{ toJson(github.event) }}
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
 
