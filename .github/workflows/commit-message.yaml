@@ -19,9 +19,10 @@ jobs:
       - name: Checkout repository 🛎
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.after }}
+          ref: ${{ github.event.after }}
 
       - name: Set commit message 📝
         id: set
         run: |
           echo "msg=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+          git log -1 --pretty=%B
